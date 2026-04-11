@@ -17,493 +17,88 @@
       --purple: #bc8cff;
       --orange: #d29922;
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
-
-    header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    header svg {
-      fill: var(--text);
-    }
-
-    header h1 {
-      font-size: 20px;
-      font-weight: 600;
-    }
-
-    header .repo-name {
-      color: var(--accent);
-      font-weight: 400;
-      margin-left: 4px;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 24px;
-    }
-
-    /* Config bar */
-    .config-bar {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px 20px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .config-bar label {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-
-    .config-bar input[type="text"] {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      color: var(--text);
-      padding: 6px 12px;
-      font-size: 14px;
-      width: 280px;
-    }
-
-    .config-bar input[type="text"]:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.3);
-    }
-
-    .config-bar button {
-      background: var(--green);
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      padding: 6px 16px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: opacity 0.15s;
-    }
-
-    .config-bar button:hover {
-      opacity: 0.85;
-    }
-
-    .config-bar button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    /* Stats bar */
-    .stats-bar {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px 20px;
-      flex: 1;
-      min-width: 140px;
-    }
-
-    .stat-card .stat-value {
-      font-size: 28px;
-      font-weight: 700;
-    }
-
-    .stat-card .stat-label {
-      font-size: 12px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-top: 2px;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; align-items: center; gap: 12px; }
+    header svg { fill: var(--text); }
+    header h1 { font-size: 20px; font-weight: 600; }
+    header .repo-name { color: var(--accent); font-weight: 400; margin-left: 4px; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 24px; }
+    .config-bar { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .config-bar label { font-size: 14px; font-weight: 600; color: var(--text-muted); }
+    .config-bar input[type="text"], .config-bar input[type="password"] { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 6px 12px; font-size: 14px; }
+    .config-bar input[type="text"] { width: 240px; }
+    .config-bar input[type="password"] { width: 260px; }
+    .config-bar input[type="text"]:focus, .config-bar input[type="password"]:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(88,166,255,0.3); }
+    .config-bar button { background: var(--green); color: #fff; border: none; border-radius: 6px; padding: 6px 16px; font-size: 14px; font-weight: 600; cursor: pointer; transition: opacity 0.15s; }
+    .config-bar button:hover { opacity: 0.85; }
+    .config-bar button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .token-hint { font-size: 11px; color: var(--text-muted); width: 100%; margin-top: -4px; padding-left: 2px; }
+    .token-hint a { color: var(--accent); text-decoration: none; }
+    .token-hint a:hover { text-decoration: underline; }
+    .token-hint code { background: var(--bg); padding: 1px 5px; border-radius: 4px; font-size: 11px; }
+    .token-status { font-size: 12px; padding: 3px 10px; border-radius: 12px; font-weight: 600; }
+    .token-status.connected { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+    .token-status.no-token { background: rgba(210,153,34,0.15); color: var(--orange); border: 1px solid rgba(210,153,34,0.3); }
+    .stats-bar { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 20px; flex: 1; min-width: 140px; }
+    .stat-card .stat-value { font-size: 28px; font-weight: 700; }
+    .stat-card .stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
     .stat-card.open .stat-value { color: var(--green); }
     .stat-card.closed .stat-value { color: var(--red); }
     .stat-card.total .stat-value { color: var(--accent); }
-
-    /* Filters */
-    .filters {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px 20px;
-      margin-bottom: 20px;
-      display: flex;
-      gap: 16px;
-      align-items: flex-end;
-      flex-wrap: wrap;
-    }
-
-    .filter-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      min-width: 150px;
-    }
-
-    .filter-group label {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .filter-group select,
-    .filter-group input[type="date"],
-    .filter-group input[type="text"] {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      color: var(--text);
-      padding: 6px 10px;
-      font-size: 13px;
-      font-family: inherit;
-    }
-
-    .filter-group select:focus,
-    .filter-group input:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.3);
-    }
-
-    .filter-group .date-range {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .filter-group .date-range span {
-      color: var(--text-muted);
-      font-size: 12px;
-    }
-
-    .clear-filters {
-      background: transparent;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      color: var(--text-muted);
-      padding: 6px 14px;
-      font-size: 13px;
-      cursor: pointer;
-      transition: all 0.15s;
-      margin-left: auto;
-      align-self: flex-end;
-    }
-
-    .clear-filters:hover {
-      color: var(--text);
-      border-color: var(--text-muted);
-    }
-
-    /* Search */
-    .search-bar {
-      position: relative;
-      margin-bottom: 16px;
-    }
-
-    .search-bar input {
-      width: 100%;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      padding: 10px 14px 10px 40px;
-      font-size: 14px;
-      font-family: inherit;
-    }
-
-    .search-bar input:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.3);
-    }
-
-    .search-bar svg {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      fill: var(--text-muted);
-    }
-
-    /* Active filters */
-    .active-filters {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-      min-height: 0;
-    }
-
-    .active-filter-tag {
-      background: rgba(88, 166, 255, 0.15);
-      color: var(--accent);
-      border: 1px solid rgba(88, 166, 255, 0.3);
-      border-radius: 20px;
-      padding: 4px 12px;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .active-filter-tag .remove {
-      cursor: pointer;
-      opacity: 0.7;
-      font-size: 14px;
-    }
-
-    .active-filter-tag .remove:hover {
-      opacity: 1;
-    }
-
-    /* Table */
-    .table-wrapper {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    thead th {
-      background: var(--bg);
-      padding: 10px 14px;
-      text-align: left;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-bottom: 1px solid var(--border);
-      cursor: pointer;
-      user-select: none;
-      white-space: nowrap;
-    }
-
-    thead th:hover {
-      color: var(--text);
-    }
-
-    thead th .sort-icon {
-      margin-left: 4px;
-      opacity: 0.4;
-    }
-
-    thead th.sorted .sort-icon {
-      opacity: 1;
-      color: var(--accent);
-    }
-
-    tbody tr {
-      border-bottom: 1px solid var(--border);
-      transition: background 0.1s;
-    }
-
-    tbody tr:last-child {
-      border-bottom: none;
-    }
-
-    tbody tr:hover {
-      background: rgba(88, 166, 255, 0.04);
-    }
-
-    tbody td {
-      padding: 12px 14px;
-      font-size: 14px;
-      vertical-align: middle;
-    }
-
-    .issue-number {
-      color: var(--text-muted);
-      font-size: 13px;
-    }
-
-    .issue-title {
-      font-weight: 600;
-    }
-
-    .issue-title a {
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .issue-title a:hover {
-      color: var(--accent);
-    }
-
-    .state-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .state-badge.open {
-      background: rgba(63, 185, 80, 0.15);
-      color: var(--green);
-      border: 1px solid rgba(63, 185, 80, 0.3);
-    }
-
-    .state-badge.closed {
-      background: rgba(188, 140, 255, 0.15);
-      color: var(--purple);
-      border: 1px solid rgba(188, 140, 255, 0.3);
-    }
-
-    .label-tag {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 12px;
-      font-size: 11px;
-      font-weight: 600;
-      margin: 1px 2px;
-      border: 1px solid transparent;
-    }
-
-    .user-cell {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .user-cell img {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-    }
-
-    .user-cell span {
-      font-size: 13px;
-    }
-
-    .date-cell {
-      color: var(--text-muted);
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    /* Empty & loading states */
-    .empty-state,
-    .loading-state,
-    .error-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--text-muted);
-    }
-
-    .empty-state h3,
-    .loading-state h3,
-    .error-state h3 {
-      font-size: 18px;
-      margin-bottom: 8px;
-      color: var(--text);
-    }
-
-    .error-state h3 {
-      color: var(--red);
-    }
-
-    .spinner {
-      width: 32px;
-      height: 32px;
-      border: 3px solid var(--border);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 16px;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Pagination */
-    .pagination {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 14px;
-      border-top: 1px solid var(--border);
-      background: var(--bg);
-    }
-
-    .pagination .page-info {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .pagination .page-buttons {
-      display: flex;
-      gap: 4px;
-    }
-
-    .pagination button {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      color: var(--text);
-      padding: 4px 12px;
-      font-size: 13px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .pagination button:hover:not(:disabled) {
-      border-color: var(--accent);
-    }
-
-    .pagination button:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
-
-    .pagination button.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-    }
-
-    /* Responsive */
+    .filters { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin-bottom: 20px; display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
+    .filter-group { display: flex; flex-direction: column; gap: 6px; min-width: 130px; }
+    .filter-group label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .filter-group select, .filter-group input[type="date"], .filter-group input[type="text"] { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 6px 10px; font-size: 13px; font-family: inherit; }
+    .filter-group select:focus, .filter-group input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(88,166,255,0.3); }
+    .filter-group .date-range { display: flex; gap: 6px; align-items: center; }
+    .filter-group .date-range span { color: var(--text-muted); font-size: 12px; }
+    .clear-filters { background: transparent; border: 1px solid var(--border); border-radius: 6px; color: var(--text-muted); padding: 6px 14px; font-size: 13px; cursor: pointer; transition: all 0.15s; margin-left: auto; align-self: flex-end; }
+    .clear-filters:hover { color: var(--text); border-color: var(--text-muted); }
+    .search-bar { position: relative; margin-bottom: 16px; }
+    .search-bar input { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); padding: 10px 14px 10px 40px; font-size: 14px; font-family: inherit; }
+    .search-bar input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(88,166,255,0.3); }
+    .search-bar svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); fill: var(--text-muted); }
+    .active-filters { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; min-height: 0; }
+    .active-filter-tag { background: rgba(88,166,255,0.15); color: var(--accent); border: 1px solid rgba(88,166,255,0.3); border-radius: 20px; padding: 4px 12px; font-size: 12px; display: flex; align-items: center; gap: 6px; }
+    .active-filter-tag .remove { cursor: pointer; opacity: 0.7; font-size: 14px; }
+    .active-filter-tag .remove:hover { opacity: 1; }
+    .table-wrapper { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    thead th { background: var(--bg); padding: 10px 14px; text-align: left; font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; white-space: nowrap; }
+    thead th:hover { color: var(--text); }
+    thead th .sort-icon { margin-left: 4px; opacity: 0.4; }
+    thead th.sorted .sort-icon { opacity: 1; color: var(--accent); }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: rgba(88,166,255,0.04); }
+    tbody td { padding: 12px 14px; font-size: 14px; vertical-align: middle; }
+    .issue-number { color: var(--text-muted); font-size: 13px; }
+    .issue-title { font-weight: 600; }
+    .issue-title a { color: var(--text); text-decoration: none; }
+    .issue-title a:hover { color: var(--accent); }
+    .state-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .state-badge.open { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+    .state-badge.closed { background: rgba(188,140,255,0.15); color: var(--purple); border: 1px solid rgba(188,140,255,0.3); }
+    .label-tag { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; margin: 1px 2px; border: 1px solid transparent; }
+    .user-cell { display: flex; align-items: center; gap: 8px; }
+    .user-cell img { width: 20px; height: 20px; border-radius: 50%; }
+    .user-cell span { font-size: 13px; }
+    .date-cell { color: var(--text-muted); font-size: 13px; white-space: nowrap; }
+    .loe-badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; background: rgba(88,166,255,0.15); color: var(--accent); border: 1px solid rgba(88,166,255,0.3); }
+    .empty-state, .loading-state, .error-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+    .empty-state h3, .loading-state h3, .error-state h3 { font-size: 18px; margin-bottom: 8px; color: var(--text); }
+    .error-state h3 { color: var(--red); }
+    .spinner { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .pagination { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-top: 1px solid var(--border); background: var(--bg); }
+    .pagination .page-info { font-size: 13px; color: var(--text-muted); }
+    .pagination .page-buttons { display: flex; gap: 4px; }
+    .pagination button { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 4px 12px; font-size: 13px; cursor: pointer; transition: all 0.15s; }
+    .pagination button:hover:not(:disabled) { border-color: var(--accent); }
+    .pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .pagination button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
     @media (max-width: 768px) {
       .container { padding: 12px; }
       .filters { flex-direction: column; align-items: stretch; }
@@ -511,238 +106,205 @@
       .stats-bar { flex-direction: column; }
       .clear-filters { margin-left: 0; }
       .config-bar { flex-direction: column; align-items: stretch; }
-      .config-bar input[type="text"] { width: 100%; }
+      .config-bar input[type="text"], .config-bar input[type="password"] { width: 100%; }
     }
   </style>
 </head>
 <body>
-
   <header>
-    <svg height="24" viewBox="0 0 16 16" width="24">
-      <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/>
-    </svg>
+    <svg height="24" viewBox="0 0 16 16" width="24"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
     <h1>Issues Dashboard <span class="repo-name" id="headerRepoName"></span></h1>
   </header>
-
   <div class="container">
-    <!-- Config -->
     <div class="config-bar">
       <label for="repoInput">Repository:</label>
       <input type="text" id="repoInput" placeholder="owner/repo" value="kevinsusai21/myFirstRepo" />
+      <label for="tokenInput">Token:</label>
+      <input type="password" id="tokenInput" placeholder="ghp_... (for Projects custom fields)" />
       <button id="loadBtn" onclick="loadIssues()">Load Issues</button>
+      <span class="token-status no-token" id="tokenStatus">No token</span>
+      <div class="token-hint">
+        Token is optional but required for Devin_LOE (GitHub Projects custom field). Needs <code>read:project</code> scope.
+        <a href="https://github.com/settings/tokens/new?scopes=read:project&amp;description=Issues+Dashboard" target="_blank" rel="noopener">Create token</a>.
+        Your token stays in your browser and is only sent to GitHub's API.
+      </div>
     </div>
-
-    <!-- Stats -->
     <div class="stats-bar" id="statsBar" style="display:none">
-      <div class="stat-card total">
-        <div class="stat-value" id="totalCount">0</div>
-        <div class="stat-label">Total Issues</div>
-      </div>
-      <div class="stat-card open">
-        <div class="stat-value" id="openCount">0</div>
-        <div class="stat-label">Open</div>
-      </div>
-      <div class="stat-card closed">
-        <div class="stat-value" id="closedCount">0</div>
-        <div class="stat-label">Closed</div>
-      </div>
+      <div class="stat-card total"><div class="stat-value" id="totalCount">0</div><div class="stat-label">Total Issues</div></div>
+      <div class="stat-card open"><div class="stat-value" id="openCount">0</div><div class="stat-label">Open</div></div>
+      <div class="stat-card closed"><div class="stat-value" id="closedCount">0</div><div class="stat-label">Closed</div></div>
     </div>
-
-    <!-- Filters -->
     <div class="filters" id="filtersBar" style="display:none">
-      <div class="filter-group">
-        <label for="filterState">State</label>
-        <select id="filterState" onchange="applyFilters()">
-          <option value="">All</option>
-          <option value="open">Open</option>
-          <option value="closed">Closed</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="filterLabel">Label</label>
-        <select id="filterLabel" onchange="applyFilters()">
-          <option value="">All Labels</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="filterAssignee">Assignee</label>
-        <select id="filterAssignee" onchange="applyFilters()">
-          <option value="">All Assignees</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="filterAuthor">Author</label>
-        <select id="filterAuthor" onchange="applyFilters()">
-          <option value="">All Authors</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label>Created</label>
-        <div class="date-range">
-          <input type="date" id="filterDateFrom" onchange="applyFilters()" />
-          <span>to</span>
-          <input type="date" id="filterDateTo" onchange="applyFilters()" />
-        </div>
-      </div>
+      <div class="filter-group"><label for="filterState">State</label><select id="filterState" onchange="applyFilters()"><option value="">All</option><option value="open">Open</option><option value="closed">Closed</option></select></div>
+      <div class="filter-group"><label for="filterLabel">Label</label><select id="filterLabel" onchange="applyFilters()"><option value="">All Labels</option></select></div>
+      <div class="filter-group"><label for="filterAssignee">Assignee</label><select id="filterAssignee" onchange="applyFilters()"><option value="">All Assignees</option></select></div>
+      <div class="filter-group"><label for="filterAuthor">Author</label><select id="filterAuthor" onchange="applyFilters()"><option value="">All Authors</option></select></div>
+      <div class="filter-group" id="filterLoeGroup" style="display:none"><label for="filterLoe">Devin_LOE</label><select id="filterLoe" onchange="applyFilters()"><option value="">All</option></select></div>
+      <div class="filter-group"><label>Created</label><div class="date-range"><input type="date" id="filterDateFrom" onchange="applyFilters()" /><span>to</span><input type="date" id="filterDateTo" onchange="applyFilters()" /></div></div>
       <button class="clear-filters" onclick="clearFilters()">Clear Filters</button>
     </div>
-
-    <!-- Search -->
     <div class="search-bar" id="searchBar" style="display:none">
-      <svg height="16" viewBox="0 0 16 16" width="16">
-        <path d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"/>
-      </svg>
+      <svg height="16" viewBox="0 0 16 16" width="16"><path d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"/></svg>
       <input type="text" id="searchInput" placeholder="Search issues by title or body..." oninput="applyFilters()" />
     </div>
-
-    <!-- Active filters -->
     <div class="active-filters" id="activeFilters"></div>
-
-    <!-- Content area -->
-    <div id="contentArea">
-      <div class="empty-state">
-        <h3>No issues loaded</h3>
-        <p>Enter a repository above and click "Load Issues" to get started.</p>
-      </div>
-    </div>
+    <div id="contentArea"><div class="empty-state"><h3>No issues loaded</h3><p>Enter a repository above and click "Load Issues" to get started.</p></div></div>
   </div>
-
   <script>
-    let allIssues = [];
-    let filteredIssues = [];
-    let currentPage = 1;
-    const PAGE_SIZE = 20;
-    let sortField = "created_at";
-    let sortDir = "desc";
+    var allIssues = [];
+    var filteredIssues = [];
+    var currentPage = 1;
+    var PAGE_SIZE = 20;
+    var sortField = "created_at";
+    var sortDir = "desc";
+    var hasLoeData = false;
+    var loeMap = {};
+
+    function getToken() { return document.getElementById("tokenInput").value.trim(); }
+
+    function updateTokenStatus() {
+      var el = document.getElementById("tokenStatus");
+      if (getToken()) { el.textContent = "Token set"; el.className = "token-status connected"; }
+      else { el.textContent = "No token"; el.className = "token-status no-token"; }
+    }
+
+    document.getElementById("tokenInput").addEventListener("input", updateTokenStatus);
 
     async function loadIssues() {
-      const repo = document.getElementById("repoInput").value.trim();
+      var repo = document.getElementById("repoInput").value.trim();
       if (!repo) return;
-
-      const btn = document.getElementById("loadBtn");
-      btn.disabled = true;
-      btn.textContent = "Loading...";
-
+      var btn = document.getElementById("loadBtn");
+      btn.disabled = true; btn.textContent = "Loading...";
       document.getElementById("headerRepoName").textContent = repo;
-      document.getElementById("contentArea").innerHTML = `
-        <div class="loading-state">
-          <div class="spinner"></div>
-          <h3>Loading issues...</h3>
-          <p>Fetching all issues from ${escapeHtml(repo)}</p>
-        </div>
-      `;
-
+      document.getElementById("contentArea").innerHTML = '<div class="loading-state"><div class="spinner"></div><h3>Loading issues...</h3><p>Fetching all issues from ' + escapeHtml(repo) + '</p></div>';
       try {
-        allIssues = await fetchAllIssues(repo);
-        populateFilterOptions();
-        applyFilters();
-
+        var token = getToken();
+        allIssues = await fetchAllIssues(repo, token);
+        loeMap = {}; hasLoeData = false;
+        if (token) {
+          try {
+            document.getElementById("contentArea").innerHTML = '<div class="loading-state"><div class="spinner"></div><h3>Loading project fields...</h3><p>Fetching Devin_LOE from GitHub Projects</p></div>';
+            loeMap = await fetchProjectCustomFields(repo, token);
+            if (Object.keys(loeMap).length > 0) hasLoeData = true;
+          } catch (projErr) { console.warn("Could not fetch project fields:", projErr.message); }
+        }
+        allIssues.forEach(function(issue) { issue._devin_loe = loeMap[issue.number] || ""; });
+        document.getElementById("filterLoeGroup").style.display = hasLoeData ? "flex" : "none";
+        populateFilterOptions(); applyFilters();
         document.getElementById("statsBar").style.display = "flex";
         document.getElementById("filtersBar").style.display = "flex";
         document.getElementById("searchBar").style.display = "block";
-
         updateStats();
       } catch (err) {
-        document.getElementById("contentArea").innerHTML = `
-          <div class="error-state">
-            <h3>Error loading issues</h3>
-            <p>${escapeHtml(err.message)}</p>
-          </div>
-        `;
+        document.getElementById("contentArea").innerHTML = '<div class="error-state"><h3>Error loading issues</h3><p>' + escapeHtml(err.message) + '</p></div>';
       }
-
-      btn.disabled = false;
-      btn.textContent = "Load Issues";
+      btn.disabled = false; btn.textContent = "Load Issues";
     }
 
-    async function fetchAllIssues(repo) {
-      let page = 1;
-      let all = [];
+    async function fetchAllIssues(repo, token) {
+      var page = 1, all = [], parts = repo.split("/");
+      var headers = { "Accept": "application/vnd.github+json" };
+      if (token) headers["Authorization"] = "Bearer " + token;
       while (true) {
-        const url = `https://api.github.com/repos/${encodeURIComponent(repo.split('/')[0])}/${encodeURIComponent(repo.split('/')[1])}/issues?state=all&per_page=100&page=${page}`;
-        const res = await fetch(url);
-        if (!res.ok) {
-          const body = await res.json().catch(() => ({}));
-          throw new Error(body.message || `HTTP ${res.status}`);
-        }
-        const data = await res.json();
+        var url = "https://api.github.com/repos/" + encodeURIComponent(parts[0]) + "/" + encodeURIComponent(parts[1]) + "/issues?state=all&per_page=100&page=" + page;
+        var res = await fetch(url, { headers: headers });
+        if (!res.ok) { var body = await res.json().catch(function() { return {}; }); throw new Error(body.message || ("HTTP " + res.status)); }
+        var data = await res.json();
         if (data.length === 0) break;
-        // Filter out pull requests (GitHub returns PRs in issues endpoint)
-        const issues = data.filter(item => !item.pull_request);
-        all = all.concat(issues);
+        all = all.concat(data.filter(function(item) { return !item.pull_request; }));
         if (data.length < 100) break;
         page++;
       }
       return all;
     }
 
+    async function fetchProjectCustomFields(repo, token) {
+      var parts = repo.split("/"), owner = parts[0], name = parts[1];
+      var graphqlUrl = "https://api.github.com/graphql";
+      var headers = { "Authorization": "Bearer " + token, "Content-Type": "application/json" };
+      var projectsQuery = '{ repository(owner: "' + owner + '", name: "' + name + '") { projectsV2(first: 10) { nodes { id number title fields(first: 30) { nodes { ... on ProjectV2Field { id name dataType } ... on ProjectV2SingleSelectField { id name dataType options { id name } } ... on ProjectV2IterationField { id name dataType } } } } } } }';
+      var projRes = await fetch(graphqlUrl, { method: "POST", headers: headers, body: JSON.stringify({ query: projectsQuery }) });
+      var projData = await projRes.json();
+      if (projData.errors) throw new Error(projData.errors.map(function(e) { return e.message; }).join("; "));
+      var projects = projData.data.repository.projectsV2.nodes;
+      if (projects.length === 0) return {};
+      var targetProject = null, loeFieldId = null;
+      for (var pi = 0; pi < projects.length; pi++) {
+        var proj = projects[pi];
+        for (var fi = 0; fi < proj.fields.nodes.length; fi++) {
+          var field = proj.fields.nodes[fi];
+          if (field.name === "Devin_LOE") { targetProject = proj; loeFieldId = field.id; break; }
+        }
+        if (targetProject) break;
+      }
+      if (!targetProject) return {};
+      var mapping = {}, hasNext = true, cursor = null;
+      while (hasNext) {
+        var cursorStr = cursor ? ', after: "' + cursor + '"' : "";
+        var itemsQuery = '{ node(id: "' + targetProject.id + '") { ... on ProjectV2 { items(first: 100' + cursorStr + ') { pageInfo { hasNextPage endCursor } nodes { content { ... on Issue { number } } fieldValues(first: 30) { nodes { ... on ProjectV2ItemFieldTextValue { text field { ... on ProjectV2Field { name } } } ... on ProjectV2ItemFieldNumberValue { number field { ... on ProjectV2Field { name } } } ... on ProjectV2ItemFieldSingleSelectValue { name field { ... on ProjectV2SingleSelectField { name } } } ... on ProjectV2ItemFieldDateValue { date field { ... on ProjectV2Field { name } } } ... on ProjectV2ItemFieldIterationValue { title field { ... on ProjectV2IterationField { name } } } } } } } } } }';
+        var itemsRes = await fetch(graphqlUrl, { method: "POST", headers: headers, body: JSON.stringify({ query: itemsQuery }) });
+        var itemsData = await itemsRes.json();
+        if (itemsData.errors) throw new Error(itemsData.errors.map(function(e) { return e.message; }).join("; "));
+        var items = itemsData.data.node.items;
+        for (var ii = 0; ii < items.nodes.length; ii++) {
+          var item = items.nodes[ii];
+          if (!item.content || item.content.number === undefined) continue;
+          var issueNum = item.content.number;
+          for (var fvi = 0; fvi < item.fieldValues.nodes.length; fvi++) {
+            var fv = item.fieldValues.nodes[fvi];
+            if (!fv.field || fv.field.name !== "Devin_LOE") continue;
+            var value = fv.text || fv.name || (fv.number !== undefined ? String(fv.number) : "") || fv.date || fv.title || "";
+            if (value) mapping[issueNum] = value;
+          }
+        }
+        hasNext = items.pageInfo.hasNextPage;
+        cursor = items.pageInfo.endCursor;
+      }
+      return mapping;
+    }
+
     function populateFilterOptions() {
-      const labels = new Set();
-      const assignees = new Set();
-      const authors = new Set();
-
-      allIssues.forEach(issue => {
-        issue.labels.forEach(l => labels.add(l.name));
+      var labels = new Set(), assignees = new Set(), authors = new Set(), loeValues = new Set();
+      allIssues.forEach(function(issue) {
+        issue.labels.forEach(function(l) { labels.add(l.name); });
         if (issue.assignee) assignees.add(issue.assignee.login);
-        issue.assignees.forEach(a => assignees.add(a.login));
+        issue.assignees.forEach(function(a) { assignees.add(a.login); });
         if (issue.user) authors.add(issue.user.login);
+        if (issue._devin_loe) loeValues.add(issue._devin_loe);
       });
-
-      fillSelect("filterLabel", "All Labels", [...labels].sort());
-      fillSelect("filterAssignee", "All Assignees", [...assignees].sort());
-      fillSelect("filterAuthor", "All Authors", [...authors].sort());
+      fillSelect("filterLabel", "All Labels", Array.from(labels).sort());
+      fillSelect("filterAssignee", "All Assignees", Array.from(assignees).sort());
+      fillSelect("filterAuthor", "All Authors", Array.from(authors).sort());
+      fillSelect("filterLoe", "All", Array.from(loeValues).sort());
     }
 
     function fillSelect(id, defaultText, options) {
-      const el = document.getElementById(id);
-      el.innerHTML = `<option value="">${defaultText}</option>`;
-      options.forEach(opt => {
-        const option = document.createElement("option");
-        option.value = opt;
-        option.textContent = opt;
-        el.appendChild(option);
-      });
+      var el = document.getElementById(id);
+      el.innerHTML = '<option value="">' + defaultText + '</option>';
+      options.forEach(function(opt) { var o = document.createElement("option"); o.value = opt; o.textContent = opt; el.appendChild(o); });
     }
 
     function applyFilters() {
-      const state = document.getElementById("filterState").value;
-      const label = document.getElementById("filterLabel").value;
-      const assignee = document.getElementById("filterAssignee").value;
-      const author = document.getElementById("filterAuthor").value;
-      const dateFrom = document.getElementById("filterDateFrom").value;
-      const dateTo = document.getElementById("filterDateTo").value;
-      const search = document.getElementById("searchInput").value.toLowerCase().trim();
-
-      filteredIssues = allIssues.filter(issue => {
+      var state = document.getElementById("filterState").value;
+      var label = document.getElementById("filterLabel").value;
+      var assignee = document.getElementById("filterAssignee").value;
+      var author = document.getElementById("filterAuthor").value;
+      var loe = document.getElementById("filterLoe").value;
+      var dateFrom = document.getElementById("filterDateFrom").value;
+      var dateTo = document.getElementById("filterDateTo").value;
+      var search = document.getElementById("searchInput").value.toLowerCase().trim();
+      filteredIssues = allIssues.filter(function(issue) {
         if (state && issue.state !== state) return false;
-        if (label && !issue.labels.some(l => l.name === label)) return false;
-        if (assignee) {
-          const hasAssignee = issue.assignees.some(a => a.login === assignee) ||
-                              (issue.assignee && issue.assignee.login === assignee);
-          if (!hasAssignee) return false;
-        }
+        if (label && !issue.labels.some(function(l) { return l.name === label; })) return false;
+        if (assignee) { var has = issue.assignees.some(function(a) { return a.login === assignee; }) || (issue.assignee && issue.assignee.login === assignee); if (!has) return false; }
         if (author && (!issue.user || issue.user.login !== author)) return false;
-        if (dateFrom) {
-          const created = new Date(issue.created_at).toISOString().slice(0, 10);
-          if (created < dateFrom) return false;
-        }
-        if (dateTo) {
-          const created = new Date(issue.created_at).toISOString().slice(0, 10);
-          if (created > dateTo) return false;
-        }
-        if (search) {
-          const title = (issue.title || "").toLowerCase();
-          const body = (issue.body || "").toLowerCase();
-          if (!title.includes(search) && !body.includes(search)) return false;
-        }
+        if (loe && issue._devin_loe !== loe) return false;
+        if (dateFrom) { var c = new Date(issue.created_at).toISOString().slice(0,10); if (c < dateFrom) return false; }
+        if (dateTo) { var c2 = new Date(issue.created_at).toISOString().slice(0,10); if (c2 > dateTo) return false; }
+        if (search) { var t = (issue.title||"").toLowerCase(), b = (issue.body||"").toLowerCase(); if (!t.includes(search) && !b.includes(search)) return false; }
         return true;
       });
-
-      sortIssues();
-      currentPage = 1;
-      renderActiveFilters();
-      renderTable();
-      updateStats();
+      sortIssues(); currentPage = 1; renderActiveFilters(); renderTable(); updateStats();
     }
 
     function clearFilters() {
@@ -750,6 +312,7 @@
       document.getElementById("filterLabel").value = "";
       document.getElementById("filterAssignee").value = "";
       document.getElementById("filterAuthor").value = "";
+      document.getElementById("filterLoe").value = "";
       document.getElementById("filterDateFrom").value = "";
       document.getElementById("filterDateTo").value = "";
       document.getElementById("searchInput").value = "";
@@ -757,252 +320,104 @@
     }
 
     function renderActiveFilters() {
-      const container = document.getElementById("activeFilters");
+      var container = document.getElementById("activeFilters");
       container.innerHTML = "";
-
-      const filters = [
-        { id: "filterState", label: "State" },
-        { id: "filterLabel", label: "Label" },
-        { id: "filterAssignee", label: "Assignee" },
-        { id: "filterAuthor", label: "Author" },
-      ];
-
-      filters.forEach(f => {
-        const val = document.getElementById(f.id).value;
-        if (val) {
-          container.innerHTML += `
-            <div class="active-filter-tag">
-              ${escapeHtml(f.label)}: ${escapeHtml(val)}
-              <span class="remove" onclick="document.getElementById('${f.id}').value=''; applyFilters();">&times;</span>
-            </div>
-          `;
-        }
+      var filters = [{id:"filterState",label:"State"},{id:"filterLabel",label:"Label"},{id:"filterAssignee",label:"Assignee"},{id:"filterAuthor",label:"Author"}];
+      if (hasLoeData) filters.push({id:"filterLoe",label:"Devin_LOE"});
+      filters.forEach(function(f) {
+        var val = document.getElementById(f.id).value;
+        if (val) container.innerHTML += '<div class="active-filter-tag">' + escapeHtml(f.label) + ': ' + escapeHtml(val) + ' <span class="remove" onclick="document.getElementById(\'' + f.id + '\').value=\'\';applyFilters();">&times;</span></div>';
       });
-
-      const from = document.getElementById("filterDateFrom").value;
-      const to = document.getElementById("filterDateTo").value;
+      var from = document.getElementById("filterDateFrom").value, to = document.getElementById("filterDateTo").value;
       if (from || to) {
-        const rangeText = from && to ? `${from} to ${to}` : from ? `from ${from}` : `to ${to}`;
-        container.innerHTML += `
-          <div class="active-filter-tag">
-            Created: ${escapeHtml(rangeText)}
-            <span class="remove" onclick="document.getElementById('filterDateFrom').value=''; document.getElementById('filterDateTo').value=''; applyFilters();">&times;</span>
-          </div>
-        `;
+        var rangeText = from && to ? from+" to "+to : from ? "from "+from : "to "+to;
+        container.innerHTML += '<div class="active-filter-tag">Created: ' + escapeHtml(rangeText) + ' <span class="remove" onclick="document.getElementById(\'filterDateFrom\').value=\'\';document.getElementById(\'filterDateTo\').value=\'\';applyFilters();">&times;</span></div>';
       }
-
-      const search = document.getElementById("searchInput").value.trim();
-      if (search) {
-        container.innerHTML += `
-          <div class="active-filter-tag">
-            Search: "${escapeHtml(search)}"
-            <span class="remove" onclick="document.getElementById('searchInput').value=''; applyFilters();">&times;</span>
-          </div>
-        `;
-      }
+      var search = document.getElementById("searchInput").value.trim();
+      if (search) container.innerHTML += '<div class="active-filter-tag">Search: "' + escapeHtml(search) + '" <span class="remove" onclick="document.getElementById(\'searchInput\').value=\'\';applyFilters();">&times;</span></div>';
     }
 
     function updateStats() {
-      const total = filteredIssues.length;
-      const open = filteredIssues.filter(i => i.state === "open").length;
-      const closed = filteredIssues.filter(i => i.state === "closed").length;
+      var total = filteredIssues.length;
+      var open = filteredIssues.filter(function(i){return i.state==="open";}).length;
+      var closed = filteredIssues.filter(function(i){return i.state==="closed";}).length;
       document.getElementById("totalCount").textContent = total;
       document.getElementById("openCount").textContent = open;
       document.getElementById("closedCount").textContent = closed;
     }
 
     function sortIssues() {
-      filteredIssues.sort((a, b) => {
-        let aVal, bVal;
-
+      filteredIssues.sort(function(a, b) {
+        var aVal, bVal;
         switch (sortField) {
-          case "number":
-            aVal = a.number;
-            bVal = b.number;
-            break;
-          case "title":
-            aVal = (a.title || "").toLowerCase();
-            bVal = (b.title || "").toLowerCase();
-            break;
-          case "state":
-            aVal = a.state;
-            bVal = b.state;
-            break;
-          case "author":
-            aVal = a.user ? a.user.login.toLowerCase() : "";
-            bVal = b.user ? b.user.login.toLowerCase() : "";
-            break;
-          case "assignee":
-            aVal = a.assignee ? a.assignee.login.toLowerCase() : "";
-            bVal = b.assignee ? b.assignee.login.toLowerCase() : "";
-            break;
-          case "created_at":
-          default:
-            aVal = a.created_at;
-            bVal = b.created_at;
-            break;
+          case "number": aVal=a.number; bVal=b.number; break;
+          case "title": aVal=(a.title||"").toLowerCase(); bVal=(b.title||"").toLowerCase(); break;
+          case "state": aVal=a.state; bVal=b.state; break;
+          case "author": aVal=a.user?a.user.login.toLowerCase():""; bVal=b.user?b.user.login.toLowerCase():""; break;
+          case "assignee": aVal=a.assignee?a.assignee.login.toLowerCase():""; bVal=b.assignee?b.assignee.login.toLowerCase():""; break;
+          case "devin_loe": aVal=(a._devin_loe||"").toLowerCase(); bVal=(b._devin_loe||"").toLowerCase(); break;
+          default: aVal=a.created_at; bVal=b.created_at; break;
         }
-
-        if (aVal < bVal) return sortDir === "asc" ? -1 : 1;
-        if (aVal > bVal) return sortDir === "asc" ? 1 : -1;
+        if (aVal < bVal) return sortDir==="asc"?-1:1;
+        if (aVal > bVal) return sortDir==="asc"?1:-1;
         return 0;
       });
     }
 
     function toggleSort(field) {
-      if (sortField === field) {
-        sortDir = sortDir === "asc" ? "desc" : "asc";
-      } else {
-        sortField = field;
-        sortDir = field === "title" || field === "author" ? "asc" : "desc";
-      }
-      sortIssues();
-      renderTable();
+      if (sortField===field) sortDir = sortDir==="asc"?"desc":"asc";
+      else { sortField=field; sortDir=field==="title"||field==="author"?"asc":"desc"; }
+      sortIssues(); renderTable();
     }
 
     function getSortIcon(field) {
-      if (sortField !== field) return '<span class="sort-icon">\u2195</span>';
-      return `<span class="sort-icon">${sortDir === "asc" ? "\u2191" : "\u2193"}</span>`;
+      if (sortField!==field) return '<span class="sort-icon">\u2195</span>';
+      return '<span class="sort-icon">'+(sortDir==="asc"?"\u2191":"\u2193")+'</span>';
     }
 
     function renderTable() {
-      const totalPages = Math.ceil(filteredIssues.length / PAGE_SIZE) || 1;
-      if (currentPage > totalPages) currentPage = totalPages;
-      const start = (currentPage - 1) * PAGE_SIZE;
-      const pageIssues = filteredIssues.slice(start, start + PAGE_SIZE);
-
-      if (filteredIssues.length === 0) {
-        document.getElementById("contentArea").innerHTML = `
-          <div class="table-wrapper">
-            <div class="empty-state">
-              <h3>No issues found</h3>
-              <p>Try adjusting your filters or search query.</p>
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      const sortedClass = (field) => sortField === field ? "sorted" : "";
-
-      let html = `
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th class="${sortedClass("number")}" onclick="toggleSort('number')"># ${getSortIcon("number")}</th>
-                <th class="${sortedClass("title")}" onclick="toggleSort('title')">Title ${getSortIcon("title")}</th>
-                <th class="${sortedClass("state")}" onclick="toggleSort('state')">State ${getSortIcon("state")}</th>
-                <th>Labels</th>
-                <th class="${sortedClass("author")}" onclick="toggleSort('author')">Author ${getSortIcon("author")}</th>
-                <th class="${sortedClass("assignee")}" onclick="toggleSort('assignee')">Assignee ${getSortIcon("assignee")}</th>
-                <th class="${sortedClass("created_at")}" onclick="toggleSort('created_at')">Created ${getSortIcon("created_at")}</th>
-              </tr>
-            </thead>
-            <tbody>
-      `;
-
-      pageIssues.forEach(issue => {
-        const labelsHtml = issue.labels.map(l => {
-          const bg = `#${l.color}`;
-          const textColor = getContrastColor(l.color);
-          return `<span class="label-tag" style="background:${bg};color:${textColor}">${escapeHtml(l.name)}</span>`;
-        }).join(" ");
-
-        const assigneeHtml = issue.assignee
-          ? `<div class="user-cell"><img src="${issue.assignee.avatar_url}" alt="" /><span>${escapeHtml(issue.assignee.login)}</span></div>`
-          : '<span style="color:var(--text-muted)">-</span>';
-
-        const authorHtml = issue.user
-          ? `<div class="user-cell"><img src="${issue.user.avatar_url}" alt="" /><span>${escapeHtml(issue.user.login)}</span></div>`
-          : "-";
-
-        const createdDate = new Date(issue.created_at).toLocaleDateString("en-US", {
-          year: "numeric", month: "short", day: "numeric"
-        });
-
-        html += `
-          <tr>
-            <td class="issue-number">#${issue.number}</td>
-            <td class="issue-title"><a href="${issue.html_url}" target="_blank" rel="noopener">${escapeHtml(issue.title)}</a></td>
-            <td><span class="state-badge ${issue.state}">${issue.state === "open" ? openIcon() : closedIcon()} ${issue.state}</span></td>
-            <td>${labelsHtml || '<span style="color:var(--text-muted)">-</span>'}</td>
-            <td>${authorHtml}</td>
-            <td>${assigneeHtml}</td>
-            <td class="date-cell">${createdDate}</td>
-          </tr>
-        `;
+      var totalPages = Math.ceil(filteredIssues.length/PAGE_SIZE)||1;
+      if (currentPage>totalPages) currentPage=totalPages;
+      var start = (currentPage-1)*PAGE_SIZE;
+      var pageIssues = filteredIssues.slice(start, start+PAGE_SIZE);
+      if (filteredIssues.length===0) { document.getElementById("contentArea").innerHTML='<div class="table-wrapper"><div class="empty-state"><h3>No issues found</h3><p>Try adjusting your filters or search query.</p></div></div>'; return; }
+      function sc(f){return sortField===f?"sorted":"";}
+      var loeH = hasLoeData?'<th class="'+sc("devin_loe")+'" onclick="toggleSort(\'devin_loe\')">Devin_LOE '+getSortIcon("devin_loe")+'</th>':"";
+      var html='<div class="table-wrapper"><table><thead><tr>'+
+        '<th class="'+sc("number")+'" onclick="toggleSort(\'number\')"># '+getSortIcon("number")+'</th>'+
+        '<th class="'+sc("title")+'" onclick="toggleSort(\'title\')">Title '+getSortIcon("title")+'</th>'+
+        '<th class="'+sc("state")+'" onclick="toggleSort(\'state\')">State '+getSortIcon("state")+'</th>'+
+        '<th>Labels</th>'+
+        '<th class="'+sc("author")+'" onclick="toggleSort(\'author\')">Author '+getSortIcon("author")+'</th>'+
+        '<th class="'+sc("assignee")+'" onclick="toggleSort(\'assignee\')">Assignee '+getSortIcon("assignee")+'</th>'+
+        loeH+
+        '<th class="'+sc("created_at")+'" onclick="toggleSort(\'created_at\')">Created '+getSortIcon("created_at")+'</th>'+
+        '</tr></thead><tbody>';
+      pageIssues.forEach(function(issue) {
+        var labelsHtml = issue.labels.map(function(l){var bg="#"+l.color;var tc=getContrastColor(l.color);return '<span class="label-tag" style="background:'+bg+';color:'+tc+'">'+escapeHtml(l.name)+'</span>';}).join(" ");
+        var assigneeHtml = issue.assignee?'<div class="user-cell"><img src="'+issue.assignee.avatar_url+'" alt="" /><span>'+escapeHtml(issue.assignee.login)+'</span></div>':'<span style="color:var(--text-muted)">-</span>';
+        var authorHtml = issue.user?'<div class="user-cell"><img src="'+issue.user.avatar_url+'" alt="" /><span>'+escapeHtml(issue.user.login)+'</span></div>':"-";
+        var createdDate = new Date(issue.created_at).toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"});
+        var loeHtml = issue._devin_loe?'<span class="loe-badge">'+escapeHtml(issue._devin_loe)+'</span>':'<span style="color:var(--text-muted)">-</span>';
+        var loeTd = hasLoeData?'<td>'+loeHtml+'</td>':"";
+        html+='<tr><td class="issue-number">#'+issue.number+'</td><td class="issue-title"><a href="'+issue.html_url+'" target="_blank" rel="noopener">'+escapeHtml(issue.title)+'</a></td><td><span class="state-badge '+issue.state+'">'+(issue.state==="open"?openIcon():closedIcon())+' '+issue.state+'</span></td><td>'+(labelsHtml||'<span style="color:var(--text-muted)">-</span>')+'</td><td>'+authorHtml+'</td><td>'+assigneeHtml+'</td>'+loeTd+'<td class="date-cell">'+createdDate+'</td></tr>';
       });
-
-      html += `</tbody></table>`;
-
-      // Pagination
-      html += `
-        <div class="pagination">
-          <div class="page-info">
-            Showing ${start + 1}-${Math.min(start + PAGE_SIZE, filteredIssues.length)} of ${filteredIssues.length} issues
-          </div>
-          <div class="page-buttons">
-            <button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? "disabled" : ""}>&laquo; Prev</button>
-      `;
-
-      for (let p = 1; p <= totalPages; p++) {
-        if (totalPages > 7) {
-          if (p === 1 || p === totalPages || (p >= currentPage - 1 && p <= currentPage + 1)) {
-            html += `<button class="${p === currentPage ? "active" : ""}" onclick="goToPage(${p})">${p}</button>`;
-          } else if (p === currentPage - 2 || p === currentPage + 2) {
-            html += `<button disabled>...</button>`;
-          }
-        } else {
-          html += `<button class="${p === currentPage ? "active" : ""}" onclick="goToPage(${p})">${p}</button>`;
-        }
+      html+='</tbody></table>';
+      html+='<div class="pagination"><div class="page-info">Showing '+(start+1)+'-'+Math.min(start+PAGE_SIZE,filteredIssues.length)+' of '+filteredIssues.length+' issues</div><div class="page-buttons"><button onclick="goToPage('+(currentPage-1)+')" '+(currentPage===1?"disabled":"")+'>\u00ab Prev</button>';
+      for (var p=1;p<=totalPages;p++){
+        if(totalPages>7){if(p===1||p===totalPages||(p>=currentPage-1&&p<=currentPage+1)){html+='<button class="'+(p===currentPage?"active":"")+'" onclick="goToPage('+p+')">'+p+'</button>';}else if(p===currentPage-2||p===currentPage+2){html+='<button disabled>...</button>';}}
+        else{html+='<button class="'+(p===currentPage?"active":"")+'" onclick="goToPage('+p+')">'+p+'</button>';}
       }
-
-      html += `
-            <button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? "disabled" : ""}>Next &raquo;</button>
-          </div>
-        </div>
-      </div>
-      `;
-
-      document.getElementById("contentArea").innerHTML = html;
+      html+='<button onclick="goToPage('+(currentPage+1)+')" '+(currentPage===totalPages?"disabled":"")+'> Next \u00bb</button></div></div></div>';
+      document.getElementById("contentArea").innerHTML=html;
     }
 
-    function goToPage(page) {
-      const totalPages = Math.ceil(filteredIssues.length / PAGE_SIZE) || 1;
-      if (page < 1 || page > totalPages) return;
-      currentPage = page;
-      renderTable();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function openIcon() {
-      return `<svg height="12" viewBox="0 0 16 16" width="12" fill="currentColor"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"/><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"/></svg>`;
-    }
-
-    function closedIcon() {
-      return `<svg height="12" viewBox="0 0 16 16" width="12" fill="currentColor"><path d="M11.28 6.78a.75.75 0 0 0-1.06-1.06L7.25 8.69 5.78 7.22a.75.75 0 0 0-1.06 1.06l2 2a.75.75 0 0 0 1.06 0l3.5-3.5Z"/><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Zm-1.5 0a6.5 6.5 0 1 0-13 0 6.5 6.5 0 0 0 13 0Z"/></svg>`;
-    }
-
-    function escapeHtml(str) {
-      const div = document.createElement("div");
-      div.textContent = str;
-      return div.innerHTML;
-    }
-
-    function getContrastColor(hexColor) {
-      if (!hexColor) return "#fff";
-      const r = parseInt(hexColor.substr(0, 2), 16);
-      const g = parseInt(hexColor.substr(2, 2), 16);
-      const b = parseInt(hexColor.substr(4, 2), 16);
-      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-      return luminance > 0.5 ? "#000" : "#fff";
-    }
-
-    // Auto-load on page load
-    window.addEventListener("DOMContentLoaded", () => {
-      loadIssues();
-    });
+    function goToPage(page){var tp=Math.ceil(filteredIssues.length/PAGE_SIZE)||1;if(page<1||page>tp)return;currentPage=page;renderTable();window.scrollTo({top:0,behavior:"smooth"});}
+    function openIcon(){return '<svg height="12" viewBox="0 0 16 16" width="12" fill="currentColor"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"/><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"/></svg>';}
+    function closedIcon(){return '<svg height="12" viewBox="0 0 16 16" width="12" fill="currentColor"><path d="M11.28 6.78a.75.75 0 0 0-1.06-1.06L7.25 8.69 5.78 7.22a.75.75 0 0 0-1.06 1.06l2 2a.75.75 0 0 0 1.06 0l3.5-3.5Z"/><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Zm-1.5 0a6.5 6.5 0 1 0-13 0 6.5 6.5 0 0 0 13 0Z"/></svg>';}
+    function escapeHtml(str){var div=document.createElement("div");div.textContent=str;return div.innerHTML;}
+    function getContrastColor(hexColor){if(!hexColor)return"#fff";var r=parseInt(hexColor.substr(0,2),16),g=parseInt(hexColor.substr(2,2),16),b=parseInt(hexColor.substr(4,2),16);return(0.299*r+0.587*g+0.114*b)/255>0.5?"#000":"#fff";}
+    window.addEventListener("DOMContentLoaded",function(){loadIssues();});
   </script>
 </body>
 </html>
