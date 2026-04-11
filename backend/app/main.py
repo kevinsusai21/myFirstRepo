@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 
 app = FastAPI(title="Reddit Clone API")
@@ -83,7 +83,7 @@ async def create_post(post: PostCreate):
         "score": 0,
         "votes": {},
         "comment_count": 0,
-        "created_at": datetime.utcnow().isoformat(),
+        "created_at": datetime.now(timezone.utc).isoformat(),
     }
     posts_db[post_id_counter] = new_post
     return new_post
@@ -176,7 +176,7 @@ async def create_comment(post_id: int, comment: CommentCreate):
         "author": comment.author,
         "score": 0,
         "votes": {},
-        "created_at": datetime.utcnow().isoformat(),
+        "created_at": datetime.now(timezone.utc).isoformat(),
     }
     comments_db[comment_id_counter] = new_comment
     posts_db[post_id]["comment_count"] = sum(
