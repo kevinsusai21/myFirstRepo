@@ -1,0 +1,70 @@
+name: "Devin: Scope New Issue"
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  scope-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scope issue with Devin
+        env:
+          DEVIN_API_KEY: ${{ secrets.DEVIN_API_KEY }}
+          DEVIN_ORG_ID: ${{ secrets.DEVIN_ORG_ID }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          REPO: ${{ github.repository }}
+          PLAYBOOK_ID: "playbook-5d238511b4184292ae6d900407f7be86"
+        run: |
+          # Build the prompt safely using env vars (avoids script injection)
+          PROMPT=$(cat <<EOF
+          Scope GitHub Issue ${REPO}#${ISSUE_NUMBER}: ${ISSUE_TITLE}
+
+          Issue Body:
+          ${ISSUE_BODY}
+
+          Repository: ${REPO}
+          Issue Number: ${ISSUE_NUMBER}
+
+          Follow the !scope-issue playbook instructions to analyze this issue, assign an LOE label, and post a scoping comment with implementation steps.
+          EOF
+          )
+
+          # Create JSON payload using jq to safely handle special characters
+          JSON_PAYLOAD=$(jq -n \
+            --arg prompt "$PROMPT" \
+            --arg title "Scope: ${ISSUE_TITLE}" \
+            --arg playbook_id "$PLAYBOOK_ID" \
+            '{
+              prompt: $prompt,
+              title: $title,
+              playbook_id: $playbook_id
+            }')
+
+          echo "Creating Devin session to scope issue #${ISSUE_NUMBER}..."
+
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+            "https://api.devin.ai/v3/organizations/${DEVIN_ORG_ID}/sessions" \
+            -H "Authorization: Bearer ${DEVIN_API_KEY}" \
+            -H "Content-Type: application/json" \
+            -d "$JSON_PAYLOAD")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -1)
+          BODY=$(echo "$RESPONSE" | head -n -1)
+
+          if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+            SESSION_URL=$(echo "$BODY" | jq -r '.url // "N/A"')
+            echo "Devin session created successfully!"
+            echo "Session URL: ${SESSION_URL}"
+            echo "### Devin Scoping Session" >> $GITHUB_STEP_SUMMARY
+            echo "Session started for issue #${ISSUE_NUMBER}: ${SESSION_URL}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "Error creating Devin session (HTTP ${HTTP_CODE}):"
+            echo "$BODY"
+            exit 1
+          fi
