@@ -13,6 +13,7 @@ import {
   Trash2,
   ChevronDown,
   ChevronUp,
+  Pencil,
 } from 'lucide-react'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
@@ -175,13 +176,18 @@ function PostDetail({
   post,
   onBack,
   onRefresh,
+  onUpdatePost,
 }: {
   post: Post
   onBack: () => void
   onRefresh: () => void
+  onUpdatePost: (postId: number, title: string, content: string) => Promise<void>
 }) {
   const [comments, setComments] = useState<Comment[]>([])
   const [newComment, setNewComment] = useState('')
+  const [isEditing, setIsEditing] = useState(false)
+  const [editTitle, setEditTitle] = useState(post.title)
+  const [editContent, setEditContent] = useState(post.content)
   const userVote = post.votes[CURRENT_USER] || 0
 
   const fetchComments = useCallback(async () => {
@@ -245,9 +251,59 @@ function PostDetail({
           <div className="flex-1">
             <div className="text-xs text-zinc-400 mb-1">
               Posted by <span className="text-orange-400">{post.author}</span> · {timeAgo(post.created_at)}
+              {post.author === CURRENT_USER && !isEditing && (
+                <button
+                  onClick={() => {
+                    setIsEditing(true)
+                    setEditTitle(post.title)
+                    setEditContent(post.content)
+                  }}
+                  className="ml-2 text-zinc-500 hover:text-orange-400 inline-flex items-center gap-1"
+                >
+                  <Pencil size={12} /> Edit
+                </button>
+              )}
             </div>
-            <h2 className="text-xl font-semibold text-zinc-100 mb-2">{post.title}</h2>
-            <p className="text-zinc-300 whitespace-pre-wrap">{post.content}</p>
+            {isEditing ? (
+              <div className="mt-2">
+                <input
+                  value={editTitle}
+                  onChange={(e) => setEditTitle(e.target.value)}
+                  placeholder="Title"
+                  className="w-full bg-zinc-900 border border-zinc-600 rounded-lg px-4 py-2.5 text-sm text-zinc-200 focus:outline-none focus:border-orange-500 mb-3"
+                />
+                <textarea
+                  value={editContent}
+                  onChange={(e) => setEditContent(e.target.value)}
+                  placeholder="Content"
+                  className="w-full bg-zinc-900 border border-zinc-600 rounded-lg px-4 py-2.5 text-sm text-zinc-200 focus:outline-none focus:border-orange-500 resize-none mb-3"
+                  rows={4}
+                />
+                <div className="flex gap-2">
+                  <button
+                    onClick={async () => {
+                      await onUpdatePost(post.id, editTitle, editContent)
+                      setIsEditing(false)
+                    }}
+                    disabled={!editTitle.trim() || !editContent.trim()}
+                    className="bg-orange-600 hover:bg-orange-500 disabled:bg-zinc-700 disabled:text-zinc-500 text-white px-4 py-2 rounded-full text-sm font-medium"
+                  >
+                    Save
+                  </button>
+                  <button
+                    onClick={() => setIsEditing(false)}
+                    className="bg-zinc-700 hover:bg-zinc-600 text-zinc-200 px-4 py-2 rounded-full text-sm font-medium"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <>
+                <h2 className="text-xl font-semibold text-zinc-100 mb-2">{post.title}</h2>
+                <p className="text-zinc-300 whitespace-pre-wrap">{post.content}</p>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -295,6 +351,9 @@ function App() {
   const [sortBy, setSortBy] = useState<'new' | 'top' | 'hot'>('new')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [editingPostId, setEditingPostId] = useState<number | null>(null)
+  const [editTitle, setEditTitle] = useState('')
+  const [editContent, setEditContent] = useState('')
 
   const fetchPosts = useCallback(async () => {
     try {
@@ -353,6 +412,18 @@ function App() {
     await fetch(`${API_URL}/api/posts/${postId}`, { method: 'DELETE' })
     if (selectedPost?.id === postId) setSelectedPost(null)
     fetchPosts()
+  }
+
+  const updatePost = async (postId: number, title: string, content: string) => {
+    await fetch(`${API_URL}/api/posts/${postId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, content }),
+    })
+    setEditingPostId(null)
+    setEditTitle('')
+    setEditContent('')
+    await refreshAndUpdateSelected()
   }
 
   return (
@@ -419,6 +490,7 @@ function App() {
             post={selectedPost}
             onBack={() => setSelectedPost(null)}
             onRefresh={refreshAndUpdateSelected}
+            onUpdatePost={updatePost}
           />
         ) : (
           <>
@@ -493,23 +565,71 @@ function App() {
                       >
                         {post.title}
                       </h3>
-                      <p className="text-sm text-zinc-400 line-clamp-2">{post.content}</p>
-                      <div className="flex items-center gap-3 mt-2">
-                        <button
-                          onClick={() => setSelectedPost(post)}
-                          className="text-xs text-zinc-500 hover:text-zinc-300 flex items-center gap-1"
-                        >
-                          <MessageSquare size={14} /> {post.comment_count} Comments
-                        </button>
-                        {post.author === CURRENT_USER && (
-                          <button
-                            onClick={(e) => { e.stopPropagation(); deletePost(post.id); }}
-                            className="text-xs text-zinc-500 hover:text-red-400 flex items-center gap-1"
-                          >
-                            <Trash2 size={14} /> Delete
-                          </button>
-                        )}
-                      </div>
+                      {editingPostId === post.id ? (
+                        <div className="mt-2">
+                          <input
+                            value={editTitle}
+                            onChange={(e) => setEditTitle(e.target.value)}
+                            placeholder="Title"
+                            className="w-full bg-zinc-900 border border-zinc-600 rounded-lg px-4 py-2.5 text-sm text-zinc-200 focus:outline-none focus:border-orange-500 mb-3"
+                          />
+                          <textarea
+                            value={editContent}
+                            onChange={(e) => setEditContent(e.target.value)}
+                            placeholder="Content"
+                            className="w-full bg-zinc-900 border border-zinc-600 rounded-lg px-4 py-2.5 text-sm text-zinc-200 focus:outline-none focus:border-orange-500 resize-none mb-3"
+                            rows={3}
+                          />
+                          <div className="flex gap-2">
+                            <button
+                              onClick={(e) => { e.stopPropagation(); updatePost(post.id, editTitle, editContent); }}
+                              disabled={!editTitle.trim() || !editContent.trim()}
+                              className="bg-orange-600 hover:bg-orange-500 disabled:bg-zinc-700 disabled:text-zinc-500 text-white px-4 py-2 rounded-full text-sm font-medium"
+                            >
+                              Save
+                            </button>
+                            <button
+                              onClick={(e) => { e.stopPropagation(); setEditingPostId(null); }}
+                              className="bg-zinc-700 hover:bg-zinc-600 text-zinc-200 px-4 py-2 rounded-full text-sm font-medium"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <p className="text-sm text-zinc-400 line-clamp-2">{post.content}</p>
+                          <div className="flex items-center gap-3 mt-2">
+                            <button
+                              onClick={() => setSelectedPost(post)}
+                              className="text-xs text-zinc-500 hover:text-zinc-300 flex items-center gap-1"
+                            >
+                              <MessageSquare size={14} /> {post.comment_count} Comments
+                            </button>
+                            {post.author === CURRENT_USER && (
+                              <>
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    setEditingPostId(post.id)
+                                    setEditTitle(post.title)
+                                    setEditContent(post.content)
+                                  }}
+                                  className="text-xs text-zinc-500 hover:text-orange-400 flex items-center gap-1"
+                                >
+                                  <Pencil size={14} /> Edit
+                                </button>
+                                <button
+                                  onClick={(e) => { e.stopPropagation(); deletePost(post.id); }}
+                                  className="text-xs text-zinc-500 hover:text-red-400 flex items-center gap-1"
+                                >
+                                  <Trash2 size={14} /> Delete
+                                </button>
+                              </>
+                            )}
+                          </div>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
