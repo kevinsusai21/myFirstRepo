@@ -40,11 +40,11 @@ interface Comment {
   replies: Comment[]
 }
 
-const CURRENT_USER = 'user123'
+const CURRENT_USER = 'kevinsusai21'
 
 function timeAgo(dateStr: string): string {
   const now = new Date()
-  const date = new Date(dateStr + 'Z')
+  const date = new Date(dateStr)
   const seconds = Math.floor((now.getTime() - date.getTime()) / 1000)
   if (seconds < 60) return 'just now'
   if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`
