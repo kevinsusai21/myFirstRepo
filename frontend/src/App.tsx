@@ -365,10 +365,10 @@ function App() {
             onClick={() => setSelectedPost(null)}
           >
             <div className="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center font-bold text-sm">
-              R
+              F
             </div>
             <h1 className="text-lg font-bold">
-              <span className="text-orange-500">reddit</span>clone
+              <span className="text-orange-500">r/</span>FoodieFinds
             </h1>
           </div>
           <button
